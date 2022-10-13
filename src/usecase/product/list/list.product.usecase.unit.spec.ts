@@ -1,5 +1,4 @@
 import { Product } from "../../../domain/product/entity/product";
-import { ProductFactory } from "../../../domain/product/factories/product-factory";
 import { ProductRepositoryInterface } from "../../../domain/product/repository/product-repository-interface";
 import { ListProductUseCase } from "./list.product.usecase";
 

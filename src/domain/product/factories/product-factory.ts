@@ -11,4 +11,8 @@ export class ProductFactory {
       default: throw new Error(`Invalid type: ${type}`);
     }
   }
+
+  static creatProductA(name: string, price: number): Product {
+    return new Product(uuid(), name, price);
+  }
 }

@@ -1,17 +1,3 @@
-/* 
-
-Complexidade de Negócio
-Domain
-  - Entity
-    - customer.ts (business rules)
-
-Complexidade Acidental
-Infra - Mundo Externo
-  - Entity / Model
-    - customer.ts (get, set) ORM or DB
-
-*/
-
 import { Address } from "../value-object/address";
 
 export class Customer {

@@ -1,4 +1,5 @@
 import { CustomerRepositoryInterface } from "../../../domain/customer/repository/customer-repository-interface";
+import { MapToDTO } from "../@shared/utils/MapToDTO";
 import { InputFindCustomerDTO, OutputFindCustomerDTO } from "./find.customer.dto";
 
 export class FindCustomerUseCase {
@@ -8,15 +9,6 @@ export class FindCustomerUseCase {
 
   async execute(input: InputFindCustomerDTO): Promise<OutputFindCustomerDTO> {
     const customer = await this.customerRepository.findById(input.id)
-    return {
-      id: customer.id,
-      name: customer.name,
-      address: {
-        street: customer.address.street,
-        number: customer.address.number,
-        city: customer.address.city,
-        zip: customer.address.zip,
-      }
-    }
+    return MapToDTO.execute(customer)
   }
 }

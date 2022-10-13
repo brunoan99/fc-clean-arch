@@ -10,8 +10,8 @@ class CustomerRepositoryStub implements CustomerRepositoryInterface {
   findAll(): Promise<Customer[]> { throw new Error("Method not implemented."); }
 }
 
-describe("Create Customer Use Case", () => {
-  test('Should create a customer', async () => {
+describe("Update Customer Use Case", () => {
+  test('Should update a customer', async () => {
     const customerRepository = new CustomerRepositoryStub()
     const sut = new UpdateCustomerUseCase(customerRepository);
     const customer = new Customer("123", "Name")

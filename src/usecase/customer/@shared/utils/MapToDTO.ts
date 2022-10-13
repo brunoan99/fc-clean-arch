@@ -1,7 +1,7 @@
 import { Customer } from "../../../../domain/customer/entity/customer";
 import { CustomerDTO } from "../customer.dto";
 
-export class MapToDto {
+export class MapToDTO {
   public static execute(entity: Customer): CustomerDTO {
     return {
       id: entity.id,

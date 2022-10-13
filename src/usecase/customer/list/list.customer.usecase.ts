@@ -1,5 +1,5 @@
 import { CustomerRepositoryInterface } from "../../../domain/customer/repository/customer-repository-interface";
-import { MapToDto } from "../@shared/utils/mapToDTO";
+import { MapToDTO } from "../@shared/utils/MapToDTO";
 import { InputListCustomerDTO, OutputListCustomerDTO  } from "./list.customer.dto";
 
 export class ListCustomerUseCase {
@@ -10,7 +10,7 @@ export class ListCustomerUseCase {
   async execute(input: InputListCustomerDTO): Promise<OutputListCustomerDTO> {
     const customers = await this.customerRepository.findAll()
     return {
-      customers: customers.map(MapToDto.execute)
+      customers: customers.map(MapToDTO.execute)
     }
   }
 }

@@ -2,6 +2,7 @@ import { CustomerRepositoryInterface } from "../../../domain/customer/repository
 import { Address } from "../../../domain/customer/value-object/address";
 import { InputCreateCustomerDTO, OutputCreateCustomerDTO } from "./create.customer.dto";
 import { CustomerFactory } from "../../../domain/customer/factories/customer-factory";
+import { MapToDTO } from "../@shared/utils/MapToDTO";
 
 export class CreateCustomerUseCase {
   constructor(
@@ -13,15 +14,6 @@ export class CreateCustomerUseCase {
     const addressEntity = new Address(address.street, address.number, address.zip, address.city)
     const customer = CustomerFactory.createWithAddress(name, addressEntity)
     await this.customerRepository.create(customer)
-    return {
-      id: customer.id,
-      name: customer.name,
-      address: {
-        street: customer.address.street,
-        number: customer.address.number,
-        city: customer.address.city,
-        zip: customer.address.zip,
-      }
-    }
+    return MapToDTO.execute(customer)
   }
 }

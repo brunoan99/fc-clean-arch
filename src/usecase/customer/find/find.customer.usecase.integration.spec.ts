@@ -1,8 +1,8 @@
 import { Sequelize } from "sequelize-typescript";
 import { Customer } from "../../../domain/customer/entity/customer";
 import { Address } from "../../../domain/customer/value-object/address";
-import { CustomerModel } from "../../../infraestructure/customer/repository/sequelize/customer";
-import { CustomerRepository } from "../../../infraestructure/customer/repository/sequelize/customer-repository";
+import { CustomerModel } from "../../../infraestructure/db/customer/repository/sequelize/customer";
+import { CustomerRepository } from "../../../infraestructure/db/customer/repository/sequelize/customer-repository";
 import { FindCustomerUseCase } from "./find.customer.usecase";
 
 describe("Find Customer Use Case", () => {

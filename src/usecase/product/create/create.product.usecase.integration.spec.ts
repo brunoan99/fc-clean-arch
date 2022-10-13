@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize-typescript"
-import { ProductModel } from "../../../infraestructure/product/repository/sequelize/product"
-import { ProductRepository } from "../../../infraestructure/product/repository/sequelize/product-repository"
+import { ProductModel } from "../../../infraestructure/db/product/repository/sequelize/product"
+import { ProductRepository } from "../../../infraestructure/db/product/repository/sequelize/product-repository"
 import { CreateProductUseCase } from "./create.product.usecase"
 
 describe('List Product Use Case', () => {

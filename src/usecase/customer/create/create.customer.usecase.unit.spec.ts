@@ -1,6 +1,5 @@
 import { Customer } from "../../../domain/customer/entity/customer";
 import { CustomerRepositoryInterface } from "../../../domain/customer/repository/customer-repository-interface";
-import { Address } from "../../../domain/customer/value-object/address";
 import { CreateCustomerUseCase } from "./create.customer.usecase";
 
 class CustomerRepositoryStub implements CustomerRepositoryInterface {

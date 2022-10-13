@@ -24,8 +24,12 @@ export class ProductRepository implements ProductRepositoryInterface {
     )
   }
   async findById(id: string): Promise<Product> {
-    const product = await ProductModel.findByPk(id)
-    return new Product(product.id, product.name, product.price)
+    try {
+      const product = await ProductModel.findByPk(id)
+      return new Product(product.id, product.name, product.price)
+    } catch (error) {
+      throw new Error("Product not found")
+    }
   }
 
   async findAll(): Promise<Product[]> {

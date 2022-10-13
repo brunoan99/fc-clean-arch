@@ -1,5 +1,3 @@
-import { Customer } from "../../../domain/customer/entity/customer";
-
 export interface InputFindCustomerDTO {
   id: string;
 }

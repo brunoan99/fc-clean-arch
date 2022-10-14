@@ -1,3 +1,4 @@
+import { NotificationError } from "../../../domain/@shared/notification/notification.error";
 import { Customer } from "../../../domain/customer/entity/customer";
 import { CustomerRepositoryInterface } from "../../../domain/customer/repository/customer-repository-interface";
 import { Address } from "../../../domain/customer/value-object/address";
@@ -76,7 +77,10 @@ describe("Update Customer Use Case", () => {
       }
     }
     let output = sut.execute(input)
-    await expect(output).rejects.toThrow("Invalid name, names must contain at least first and last name.")
+    await expect(output).rejects.toThrowError(new NotificationError([{
+      context: "customer",
+      message: "Invalid name, names must contain at least first and last name"
+    }]))
     input = {
       id: "123",
       name: "", 
@@ -88,7 +92,9 @@ describe("Update Customer Use Case", () => {
       }
     }
     output = sut.execute(input)
-    await expect(output).rejects.toThrow("Invalid name, names must contain at least first and last name.")
-    customerRepository.findById('any')
+    await expect(output).rejects.toThrowError(new NotificationError([{
+      context: "customer",
+      message: "Invalid name, names must contain at least first and last name"
+    }]))
   })
 })

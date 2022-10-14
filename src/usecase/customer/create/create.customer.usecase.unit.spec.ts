@@ -1,3 +1,4 @@
+import { NotificationError } from "../../../domain/@shared/notification/notification.error";
 import { Customer } from "../../../domain/customer/entity/customer";
 import { CustomerRepositoryInterface } from "../../../domain/customer/repository/customer-repository-interface";
 import { CreateCustomerUseCase } from "./create.customer.usecase";
@@ -46,7 +47,10 @@ describe("Create Customer Use Case", () => {
       }
     }
     const output = sut.execute(input)
-    await expect(output).rejects.toThrow("Name is required")
+    await expect(output).rejects.toThrowError(new NotificationError([{
+      context: "customer",
+      message: "Name is required"
+    }]))
   })
 
   test('Should throw an error when street is missing', async () => {

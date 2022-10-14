@@ -1,3 +1,4 @@
+import { NotificationError } from '../../@shared/notification/notification.error'
 import { Address } from '../value-object/address'
 import { Customer } from './customer'
 
@@ -5,13 +6,19 @@ describe('Customer', () => {
   test('Should throw error when id is empty', () => {
     expect(() => {
       new Customer("", "John")
-    }).toThrowError("Id is required")
+    }).toThrowError(new NotificationError([{
+      context: "customer",
+      message: "Id is required"
+    }]))
   })
 
   test('Should throw error when id name empty', () => {
     expect(() => {
       new Customer("123", "")
-    }).toThrowError("Name is required")
+    }).toThrowError(new NotificationError([{
+      context: "customer",
+      message: "Name is required"
+    }]))
   })
 
   test('Should change name', () => {
@@ -36,7 +43,10 @@ describe('Customer', () => {
     const customer = new Customer("1", "Customer 1")
     expect(() => {
       customer.activate()
-    }).toThrowError("Address is required to activate a customer")
+    }).toThrowError(new NotificationError([{
+      context: "customer",
+      message: "Address is required to activate a customer"
+    }]))
   })
 
   test("Should add reward points", () => {

@@ -66,7 +66,7 @@ describe("Update Customer Use Case", () => {
     customer.changeAddress(address)
     jest.spyOn(customerRepository, "findById").mockReturnValue(new Promise(resolve => resolve(customer)))
     jest.spyOn(customerRepository, "update").mockImplementation(async () => { return })
-    let input = {
+    const input = {
       id: "123",
       name: "Name", 
       address: {
@@ -76,25 +76,7 @@ describe("Update Customer Use Case", () => {
         zip: "Zip",
       }
     }
-    let output = sut.execute(input)
-    await expect(output).rejects.toThrowError(new NotificationError([{
-      context: "customer",
-      message: "Invalid name, names must contain at least first and last name"
-    }]))
-    input = {
-      id: "123",
-      name: "", 
-      address: {
-        street: "Street",
-        number: 123, 
-        city: "City",
-        zip: "Zip",
-      }
-    }
-    output = sut.execute(input)
-    await expect(output).rejects.toThrowError(new NotificationError([{
-      context: "customer",
-      message: "Invalid name, names must contain at least first and last name"
-    }]))
+    const output = sut.execute(input)
+    await expect(output).rejects.toThrowError("customer: Invalid name, names must contain at least first and last name")
   })
 })

@@ -47,10 +47,7 @@ describe("Create Customer Use Case", () => {
       }
     }
     const output = sut.execute(input)
-    await expect(output).rejects.toThrowError(new NotificationError([{
-      context: "customer",
-      message: "Name is required"
-    }]))
+    await expect(output).rejects.toThrowError("customer: Name is mandatory")
   })
 
   test('Should throw an error when street is missing', async () => {

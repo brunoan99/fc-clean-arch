@@ -6,19 +6,13 @@ describe('Customer', () => {
   test('Should throw error when id is empty', () => {
     expect(() => {
       new Customer("", "John")
-    }).toThrowError(new NotificationError([{
-      context: "customer",
-      message: "Id is required"
-    }]))
+    }).toThrowError("customer: Id is mandatory")
   })
 
   test('Should throw error when id name empty', () => {
     expect(() => {
       new Customer("123", "")
-    }).toThrowError(new NotificationError([{
-      context: "customer",
-      message: "Name is required"
-    }]))
+    }).toThrowError("customer: Name is mandatory")
   })
 
   test('Should change name', () => {
@@ -43,10 +37,7 @@ describe('Customer', () => {
     const customer = new Customer("1", "Customer 1")
     expect(() => {
       customer.activate()
-    }).toThrowError(new NotificationError([{
-      context: "customer",
-      message: "Address is required to activate a customer"
-    }]))
+    }).toThrowError("customer: Address is required to activate a customer")
   })
 
   test("Should add reward points", () => {

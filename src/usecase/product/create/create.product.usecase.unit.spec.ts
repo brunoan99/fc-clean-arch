@@ -36,7 +36,7 @@ describe('Create Product Use Case', () => {
       price: 1
     }
     const output = sut.execute(input)
-    await expect(output).rejects.toThrow("Name is required")
+    await expect(output).rejects.toThrow("product: Name is mandatory")
   })
 
   test('Should throw an error when price is missing', async () => {
@@ -47,6 +47,6 @@ describe('Create Product Use Case', () => {
       price: -1
     }
     const output = sut.execute(input)
-    await expect(output).rejects.toThrow("Price is required")
+    await expect(output).rejects.toThrow("product: Price is mandatory")
   })
 })

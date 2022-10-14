@@ -57,6 +57,6 @@ describe("Update Product Use Case", () => {
       price: 10
     }
     let output = sut.execute(input)
-    await expect(output).rejects.toThrow("Name is required")
+    await expect(output).rejects.toThrow("product: Name is mandatory")
   })
 })

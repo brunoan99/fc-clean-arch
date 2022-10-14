@@ -1,12 +1,12 @@
-import { ProductInterface } from "./product-interface";
+import { Entity } from "../../@shared/entity/entity.abstract";
+import { NotificationError } from "../../@shared/notification/notification.error";
 
-export class Product implements ProductInterface {
-
-  private _id: string;
+export class Product extends Entity {
   private _name: string;
   private _price: number;
 
   constructor(id: string, name: string, price: number) {
+    super()
     this._id = id;
     this._name = name;
     this._price = price;
@@ -17,27 +17,58 @@ export class Product implements ProductInterface {
 
   get name(): string { return this._name; }
   
+  get price(): number { return this._price; }
+
+
   changeName(name: string) {
+    this.validateName(name)
+    this.checkErrors()
     this._name = name;
-    this.validate()
   }
 
-  get price(): number { return this._price; }
-  
   changePrice(price: number) {
+    this.validatePrice(price)
+    this.checkErrors()
     this._price = price;
-    this.validate()
+  }
+
+  private validateId(id: string): void {
+    if (id.length === 0) {
+      this.notification.addError({
+        context: "product",
+        message: "Id is mandatory",
+      })
+    }
+  }
+
+  private validateName(name: string): void {
+    if (name.length === 0) {
+      this.notification.addError({
+        context: "product",
+        message: "Name is mandatory",
+      })
+    }
+  }
+
+  private validatePrice(price: number) {
+    if (price <= 0) {
+      this.notification.addError({
+        context: "product",
+        message: "Price is mandatory",
+      })
+    }
+  }
+
+  private checkErrors(): void {
+    if (this.notification.hasError()) {
+      throw new NotificationError(this.notification.errors)
+    }
   }
 
   validate() {
-    if (this._id.length === 0) {
-      throw new Error('Id is required')
-    }
-    if (this._name.length === 0) {
-      throw new Error('Name is required')
-    }
-    if (this._price <= 0) {
-      throw new Error('Price is required')
-    }
+    this.validateId(this._id)
+    this.validateName(this._name)
+    this.validatePrice(this._price)
+    this.checkErrors()
   }
 }

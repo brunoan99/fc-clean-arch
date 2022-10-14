@@ -45,4 +45,10 @@ describe('Product', () => {
       new Product("1", "Product1", 2).changePrice(-1)
     }).toThrowError("product: Price is mandatory")
   })
+
+  test('Should return error when both name and price was invalid', () => {
+    expect(() => {
+      new Product("1", "", -1)
+    }).toThrowError("product: Name is mandatory,product: Price is mandatory")
+  })
 })

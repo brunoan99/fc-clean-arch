@@ -1,5 +1,6 @@
 import { Entity } from "../../@shared/entity/entity.abstract";
 import { NotificationError } from "../../@shared/notification/notification.error";
+import { ProductValidatorFactory } from "../factories/product.validator.factory";
 
 export class Product extends Entity {
   private _name: string;
@@ -21,42 +22,15 @@ export class Product extends Entity {
 
 
   changeName(name: string) {
-    this.validateName(name)
-    this.checkErrors()
     this._name = name;
+    this.validate()
+    this.checkErrors()
   }
 
   changePrice(price: number) {
-    this.validatePrice(price)
-    this.checkErrors()
     this._price = price;
-  }
-
-  private validateId(id: string): void {
-    if (id.length === 0) {
-      this.notification.addError({
-        context: "product",
-        message: "Id is mandatory",
-      })
-    }
-  }
-
-  private validateName(name: string): void {
-    if (name.length === 0) {
-      this.notification.addError({
-        context: "product",
-        message: "Name is mandatory",
-      })
-    }
-  }
-
-  private validatePrice(price: number) {
-    if (price <= 0) {
-      this.notification.addError({
-        context: "product",
-        message: "Price is mandatory",
-      })
-    }
+    this.validate()
+    this.checkErrors()
   }
 
   private checkErrors(): void {
@@ -66,9 +40,7 @@ export class Product extends Entity {
   }
 
   validate() {
-    this.validateId(this._id)
-    this.validateName(this._name)
-    this.validatePrice(this._price)
+    ProductValidatorFactory.create().validate(this)
     this.checkErrors()
   }
 }

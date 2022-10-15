@@ -1,6 +1,7 @@
 import supertest from "supertest";
 import { Entity } from "../../@shared/entity/entity.abstract";
 import { NotificationError } from "../../@shared/notification/notification.error";
+import { CustomerValidatorFactory } from "../factories/customer.validator.factory";
 import { Address } from "../value-object/address";
 
 export class Customer extends Entity {
@@ -31,18 +32,7 @@ export class Customer extends Entity {
   changeAddress(address: Address) { this._address = address; }
 
   validate() {
-    if (this._id.length === 0) {
-      this.notification.addError({
-        context: "customer",
-        message: "Id is mandatory",
-      })
-    }
-    if (this._name.length === 0) {
-      this.notification.addError({
-        context: "customer",
-        message: "Name is mandatory",
-      })
-    }
+    CustomerValidatorFactory.create().validate(this)
   }
   
   changeName(name: string) {
